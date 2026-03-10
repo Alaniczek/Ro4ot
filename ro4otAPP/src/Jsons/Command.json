@@ -30,5 +30,13 @@
     "Set_Power_25": {
         "category": "Power",
         "order": "7"
+    },
+    "Test": {
+        "category": "Test",
+        "order": "T"
+    },
+    "TestValue": {
+        "category": "Tesytyyy",
+        "order": "Tyyy"
     }
 }
