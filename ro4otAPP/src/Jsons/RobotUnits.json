@@ -1,0 +1,10 @@
+[
+    {
+        "IP": "EXAMPLE",
+        "Port": "EXAMPLE",
+        "Name": "EXAMPLE",
+        "MODEL": "EXAMPLE",
+        "LastStatus": "HOUR/DATE",
+        "IsOnline": false
+    }
+]

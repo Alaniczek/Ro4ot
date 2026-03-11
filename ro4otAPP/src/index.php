@@ -11,7 +11,6 @@ $esp_port = 4210;
 $Logger = logger::getInstance();
 $Logger->changePath('Jsons/LogHistory.json');
 
-// OD ESP
 if (isset($_GET['msg'])) {
     $wpis = date("H:i:s") . " [ESP -> PHP]: " . $_GET['msg'] . "\n";
     //file_put_contents($plik_logow, $wpis, FILE_APPEND);
@@ -20,7 +19,6 @@ if (isset($_GET['msg'])) {
 }
 
 $CommandManager = new CommandManager($esp_ip, $esp_port, $Logger);
-
 if (isset($_POST['action'])) {
     $cmd = $_POST['action'];
 

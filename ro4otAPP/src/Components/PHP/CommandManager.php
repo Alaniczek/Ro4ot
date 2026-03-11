@@ -12,7 +12,11 @@ class CommandManager {
         $this->esp_ip = $esp_ip;
         $this->esp_port = $esp_port;
         $this->logger = $logger;
-
+    }
+    public function __constuct(RobotManualFinder $finder, Logger $logger) {
+        $this->esp_ip = $finder->Ip;
+        $this->esp_port = $finder->Port;
+        $this->logger = $logger;
     }
 
     public function changeCommandListPath($newPath) {
