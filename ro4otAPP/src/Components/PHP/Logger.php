@@ -30,9 +30,26 @@ class logger
         ];
         file_put_contents($this->path, json_encode($currentData, JSON_PRETTY_PRINT));
     }
+    public static function clearLogByPath($Path)
+    {
+        file_put_contents($Path, json_encode([]));
+    }
 
     public function clearLog()
     {
         file_put_contents($this->path, json_encode([]));
+    }
+
+    public function GiveEveryLogs()
+    {
+        if (file_exists($this->path)) {
+            return json_decode(file_get_contents($this->path), true);
+        }
+        return [];
+    }
+    
+    public function getRawLogs()
+    {
+        return file_exists($this->path) ? file_get_contents($this->path) : '';
     }
 }

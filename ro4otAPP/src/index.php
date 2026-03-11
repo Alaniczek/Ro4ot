@@ -5,7 +5,7 @@ require_once 'Components/PHP/CommandManager.php';
 
 $esp_ip = '192.168.125.34'; // ESP IP :> 
 $esp_port = 4210;
-$plik_logow = 'logi.txt';
+// $plik_logow = 'logi.txt';
 
 
 $Logger = logger::getInstance();
@@ -14,7 +14,7 @@ $Logger->changePath('Jsons/LogHistory.json');
 // OD ESP
 if (isset($_GET['msg'])) {
     $wpis = date("H:i:s") . " [ESP -> PHP]: " . $_GET['msg'] . "\n";
-    file_put_contents($plik_logow, $wpis, FILE_APPEND);
+    //file_put_contents($plik_logow, $wpis, FILE_APPEND);
     $Logger->log("ESP wysłał wiadomość: " . $_GET['msg']);
     exit;
 }
@@ -25,13 +25,13 @@ if (isset($_POST['action'])) {
     $cmd = $_POST['action'];
 
     if ($cmd === 'clear') {
-        file_put_contents($plik_logow, "");
+        //file_put_contents($plik_logow, "");
         $Logger->clearLog();
     } 
     else {
         $wpis = date("H:i:s") . " [PHP -> ESP]: Wyslano komende " . $cmd . "\n";
-        file_put_contents($plik_logow, $wpis, FILE_APPEND);
-        $Logger->log("Wysłano komendę do ESP: " . $cmd);
+        //file_put_contents($plik_logow, $wpis, FILE_APPEND);
+        //$Logger->log("Wysłano komendę do ESP: " . $cmd);
         
         $CommandManager->sendCommand($cmd);
     }
@@ -55,10 +55,10 @@ if (isset($_POST['AddQueue']))
         if ($order) {
             $CommandManager->sendCommand($order);
             $wpis = date("H:i:s") . " [PHP -> ESP]: Wyslano komende " . $order . "\n";
-            file_put_contents($plik_logow, $wpis, FILE_APPEND);
+            //file_put_contents($plik_logow, $wpis, FILE_APPEND);
             $Logger->log("Wysłano komendę do ESP: " . $order);
 
-            array_shift($queueContent); // Usuwa pierwszy element z kolejki
+            array_shift($queueContent); 
             file_put_contents('Jsons/Queue.json', json_encode($queueContent, JSON_PRETTY_PRINT));
         }
     }else
@@ -94,9 +94,16 @@ if (isset($_POST['AddQueue']))
     <h3>LOGI SYSTEMOWE</h3>
     <textarea style="width: 100%; height: 300px; font-family: monospace;">
         <?php 
-            if (file_exists($plik_logow)) {
-                echo file_get_contents($plik_logow);
+            // if (file_exists($plik_logow)) {
+            //     echo file_get_contents($plik_logow);
+            // }
+            $logger = logger::getInstance();
+            $logs = $logger->GiveEveryLogs();
+
+            foreach ($logs as $log) {
+                echo "[" . $log['data'] . "] " . $log['zdarzenie'] . "\n";
             }
+
         ?>
     </textarea>
     
