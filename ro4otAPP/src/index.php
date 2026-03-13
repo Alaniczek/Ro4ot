@@ -3,7 +3,7 @@
 require_once 'Components/PHP/Logger.php';
 require_once 'Components/PHP/CommandManager.php';
 
-$esp_ip = '192.168.125.34'; // ESP IP :> 
+$esp_ip = '192.168.243.143'; // ESP IP :> 
 $esp_port = 4210;
 // $plik_logow = 'logi.txt';
 
@@ -68,7 +68,17 @@ if (isset($_POST['AddQueue']))
         file_put_contents('Jsons/Queue.json', json_encode($queueContent, JSON_PRETTY_PRINT));
     }
 }
-
+//<button type="submit" name="AddQueue" value="clearQueue" style="font-size: 20px; padding: 10px; background: #D3D3D3;">CLEAR QUEUE</button>
+//<button type="submit" name="AddQueue" value="startQueue" style="font-size: 20px; padding: 10px; background: #D3D3D3;">START QUEUE</button>
+if(isset($_POST['Searcher']))
+{
+    $ip = $_POST['esp_ip'];
+    $port = $_POST['esp_port'];
+    //echo "Wpisane IP: " . $ip . "<br>";
+    //echo "Wpisany Port: " . $port;
+    $CommandManager->sendCommand('I'. ' ' . $ip . ' ' . $port . 'X');
+    
+}
 
 ?>
 
@@ -79,6 +89,12 @@ if (isset($_POST['AddQueue']))
     <title>Sterowanie Robotem</title>
 </head>
 <body>
+    <form method="post">
+    <h4>IP of ESP</h4>
+    <input type="text" placeholder="Wpisz IP" name="esp_ip">
+    <input type="text" placeholder="Wpisz port" name="esp_port">
+    <input type="submit" value="Send_IP_PORT" name="Searcher">
+</form>
 
     <script src="Components/JS/ButtonMaker.js"></script>
     <script src="Components/JS/ButtonForQueue.js"></script>
@@ -109,6 +125,7 @@ if (isset($_POST['AddQueue']))
     <hr>
     <h2>ADD TOQUEUE</h2>
     <h5>IT IT NOT AUTOMATIC, YOU MUST CLICK TO SEND :> </h5>
+    
     <form method="post">
         <div class="QueueButtons"></div>
         <button type="submit" name="AddQueue" value="clearQueue" style="font-size: 20px; padding: 10px; background: #D3D3D3;">CLEAR QUEUE</button>

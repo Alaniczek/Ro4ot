@@ -27,7 +27,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   
   WiFi.begin(WIFI_SSID, WIFI_PASS);
-  while (WiFi.status() != WL_CONNECTED) delay(500);
+  while (WiFi.status() != WL_CONNECTED) delay(500); //event handler , wifi.onEvent
   
   udp.begin(LOCAL_PORT);
   Serial.println("\n=== START ESP ===");

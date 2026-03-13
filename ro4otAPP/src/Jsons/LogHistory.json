@@ -1,54 +1,106 @@
 [
     {
-        "data": "2026-03-11 12:23:02",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: D"
-    },
-    {
-        "data": "2026-03-11 12:23:02",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
-    },
-    {
-        "data": "2026-03-11 12:23:03",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
-    },
-    {
-        "data": "2026-03-11 12:23:03",
+        "data": "2026-03-13 12:26:43",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
     },
     {
-        "data": "2026-03-11 12:23:04",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: 9"
-    },
-    {
-        "data": "2026-03-11 12:23:04",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: 8"
-    },
-    {
-        "data": "2026-03-11 12:23:04",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: 7"
-    },
-    {
-        "data": "2026-03-11 12:23:04",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: 7"
-    },
-    {
-        "data": "2026-03-11 12:23:05",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: X"
-    },
-    {
-        "data": "2026-03-11 12:23:06",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: D"
-    },
-    {
-        "data": "2026-03-11 12:23:06",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: D"
-    },
-    {
-        "data": "2026-03-11 12:23:06",
+        "data": "2026-03-13 12:26:46",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
     },
     {
-        "data": "2026-03-11 12:23:06",
+        "data": "2026-03-13 12:26:48",
+        "zdarzenie": "ESP wys\u0142a\u0142 wiadomo\u015b\u0107: test_wiadomosci"
+    },
+    {
+        "data": "2026-03-13 12:26:53",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 32.1.25.2 32"
+    },
+    {
+        "data": "2026-03-13 12:50:48",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
+    },
+    {
+        "data": "2026-03-13 12:52:03",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-13 12:52:04",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
+    },
+    {
+        "data": "2026-03-13 12:52:06",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
+    },
+    {
+        "data": "2026-03-13 12:52:07",
+        "zdarzenie": "ESP wys\u0142a\u0142 wiadomo\u015b\u0107: test_wiadomosci"
+    },
+    {
+        "data": "2026-03-13 12:52:19",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 321 21"
+    },
+    {
+        "data": "2026-03-13 12:58:05",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-13 12:58:22",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-13 12:58:26",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: D"
+    },
+    {
+        "data": "2026-03-13 12:58:34",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 32.12.42.1 21"
+    },
+    {
+        "data": "2026-03-13 12:59:51",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-13 12:59:58",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 31.321.52.1 21"
+    },
+    {
+        "data": "2026-03-13 13:16:01",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 31.321.52.1 21 "
+    },
+    {
+        "data": "2026-03-13 13:16:02",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-13 13:16:12",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
+    },
+    {
+        "data": "2026-03-13 13:16:20",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 32.12.42 21 "
+    },
+    {
+        "data": "2026-03-13 13:21:22",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 32.12.42 21X"
+    },
+    {
+        "data": "2026-03-13 13:22:28",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-13 13:22:35",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
+    },
+    {
+        "data": "2026-03-13 13:22:44",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 32.12.52.1 52X"
+    },
+    {
+        "data": "2026-03-13 13:25:17",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-13 13:25:25",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 1234567 90X"
     }
 ]
