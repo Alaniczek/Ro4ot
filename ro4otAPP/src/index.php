@@ -11,6 +11,11 @@ $esp_port = 4210;
 $Logger = logger::getInstance();
 $Logger->changePath('Jsons/LogHistory.json');
 
+$CommandManager = new CommandManager($esp_ip, $esp_port, $Logger);
+
+
+ //DODAĆ SYSTEM ZCZYTYWANIA "JAKI ROZKAZ PRZYSZEDŁ,
+//ABY MÓC GO SFORMATOWAĆ I WYSŁAĆ DO ODPOWIEDNIEGO ROBOTA :> 
 if (isset($_GET['msg'])) {
     $wpis = date("H:i:s") . " [ESP -> PHP]: " . $_GET['msg'] . "\n";
     //file_put_contents($plik_logow, $wpis, FILE_APPEND);
@@ -18,7 +23,6 @@ if (isset($_GET['msg'])) {
     exit;
 }
 
-$CommandManager = new CommandManager($esp_ip, $esp_port, $Logger);
 if (isset($_POST['action'])) {
     $cmd = $_POST['action'];
 

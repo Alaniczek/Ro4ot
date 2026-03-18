@@ -17,7 +17,8 @@ class RobotManualManager {
         return self::$instance;
     }
 
-    public function changePath($newPath) {
+    public function changePath($newPath)
+    {
         $this->RobotUnitsPath = $newPath;
     }
 
@@ -27,7 +28,7 @@ class RobotManualManager {
         return $robotUnits;
     }
 
-    private function CheckIfRobotExists($name)
+    private function CheckIfRobotExists($name) : bool
     {
         $robotUnits = $this->GetRobotUnits();
         foreach($robotUnits as $unit)

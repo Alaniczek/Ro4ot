@@ -3,8 +3,7 @@
 class logger
 {
     private $path = 'Jsons/LogHistory.json';
-
-
+    
     //SINGLETON :>
     private function __construct() {}
     private static $instance = null;
