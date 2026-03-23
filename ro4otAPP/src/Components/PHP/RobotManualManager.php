@@ -17,17 +17,18 @@ class RobotManualManager {
         return self::$instance;
     }
 
-    public function changePath($newPath)
+    //PATH 
+    public function changePath($newPath) : void 
     {
         $this->RobotUnitsPath = $newPath;
     }
 
-    public function GetRobotUnits()
+    //JSON MANAGEMENT VIEW    
+    public function GetRobotUnits() : array
     {
         $robotUnits = file_exists($this->RobotUnitsPath) ? json_decode(file_get_contents($this->RobotUnitsPath), true) : [];
         return $robotUnits;
     }
-
     private function CheckIfRobotExists($name) : bool
     {
         $robotUnits = $this->GetRobotUnits();
@@ -41,21 +42,37 @@ class RobotManualManager {
         return false;
     }
 
-    public function SelectRobot($name)
+    //SELECTOR
+    public function getSelectedRobot(): RobotManualFinder
     {
-        if($this->CheckIfRobotExists($name))
-        {
-            $this->SelectedRobot = new RobotManualFinder($unit['IP'], $unit['Port']);
+        if ($this->SelectedRobot === null) {
+            throw new Exception("Brak wybranego robota. Użyj najpierw SelectRobotByName().");
         }
+        return $this->SelectedRobot;
     }
 
-    public function SendCommandToSelectedRobot($command)
+    public function SelectRobotByName(string $name): void
     {
-        if(isset($this->SelectedRobot))
-        {
-            $CommandManager = new CommandManager($this->SelectedRobot->Ip, $this->SelectedRobot->Port, Logger::getInstance());
-            $CommandManager->sendCommand($command);
+        $robotUnits = $this->GetRobotUnits();
+        
+        foreach ($robotUnits as $unit) {
+            if ($unit['Name'] === $name) {
+                $this->SelectedRobot = new RobotManualFinder($unit['IP'], $unit['Port']);
+                return;
+            }
         }
+        
+        $this->SelectedRobot = null;
+    }
+
+
+    //COMMAND SENDER
+    public function SendCommandToSelectedRobot($command) : void 
+    {
+        $robot = $this->getSelectedRobot();
+    
+        $CommandManager = new CommandManager($robot->Ip, $robot->Port, Logger::getInstance());
+        $CommandManager->sendCommand($command);
     }
 
 

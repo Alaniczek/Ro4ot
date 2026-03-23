@@ -5,7 +5,6 @@ require_once 'Components/PHP/CommandManager.php';
 
 $esp_ip = '192.168.243.143'; // ESP IP :> 
 $esp_port = 4210;
-// $plik_logow = 'logi.txt';
 
 
 $Logger = logger::getInstance();
@@ -14,11 +13,10 @@ $Logger->changePath('Jsons/LogHistory.json');
 $CommandManager = new CommandManager($esp_ip, $esp_port, $Logger);
 
 
- //DODAĆ SYSTEM ZCZYTYWANIA "JAKI ROZKAZ PRZYSZEDŁ,
+ //DODAĆ SYSTEM ZCZYTYWANIA "JAKI ROZKAZ PRZYSZEDŁ",
 //ABY MÓC GO SFORMATOWAĆ I WYSŁAĆ DO ODPOWIEDNIEGO ROBOTA :> 
 if (isset($_GET['msg'])) {
     $wpis = date("H:i:s") . " [ESP -> PHP]: " . $_GET['msg'] . "\n";
-    //file_put_contents($plik_logow, $wpis, FILE_APPEND);
     $Logger->log("ESP wysłał wiadomość: " . $_GET['msg']);
     exit;
 }
@@ -27,18 +25,15 @@ if (isset($_POST['action'])) {
     $cmd = $_POST['action'];
 
     if ($cmd === 'clear') {
-        //file_put_contents($plik_logow, "");
         $Logger->clearLog();
     } 
     else {
         $wpis = date("H:i:s") . " [PHP -> ESP]: Wyslano komende " . $cmd . "\n";
-        //file_put_contents($plik_logow, $wpis, FILE_APPEND);
         //$Logger->log("Wysłano komendę do ESP: " . $cmd);
-        
         $CommandManager->sendCommand($cmd);
     }
 
-    // Odśwież stronę (czyści formularz przed F5)
+    // WebRefresh
     header("Location: " . $_SERVER['PHP_SELF']); 
     exit;
 }
@@ -57,7 +52,6 @@ if (isset($_POST['AddQueue']))
         if ($order) {
             $CommandManager->sendCommand($order);
             $wpis = date("H:i:s") . " [PHP -> ESP]: Wyslano komende " . $order . "\n";
-            //file_put_contents($plik_logow, $wpis, FILE_APPEND);
             $Logger->log("Wysłano komendę do ESP: " . $order);
 
             array_shift($queueContent); 

@@ -2,40 +2,45 @@
 require_once 'Logger.php';
 
 class CommandManager {
+    //THIS CLASS ONLY USE command.json and sends to ESP command :> 
     private $esp_ip;
     private $esp_port;
     private $logger;
     private $commandListPath = '../../Jsons/Command.json';
     private $commandList = [];
 
+    // CONSTUCT's 
     public function __construct($esp_ip, $esp_port , $logger) {
         $this->esp_ip = $esp_ip;
         $this->esp_port = $esp_port;
         $this->logger = $logger;
     }
-    public function __constuct(RobotManualFinder $finder, Logger $logger) {
-        $this->esp_ip = $finder->Ip;
-        $this->esp_port = $finder->Port;
-        $this->logger = $logger;
-    }
 
+
+
+    //JSON PATH
     public function changeCommandListPath($newPath) {
         $this->commandListPath = $newPath;
     }
 
+
+    //JSON MANAGEMENT VIEW
     public function GetCommandList()
     {
         $commandList = file_exists($this->commandListPath) ? json_decode(file_get_contents($this->commandListPath), true) : [];
         return $commandList;
     }
 
-    public function delateCommandByName($name) 
+
+    //JSON MANAGEMENT ADD/DELATE
+    public function deleteCommandByName($name) 
     {
         $commandList = $this->GetCommandList();
         unset($commandList[$name]);
         file_put_contents($this->commandListPath, json_encode($commandList, JSON_PRETTY_PRINT));
     }
-    public function delateCommandByOrder($order){
+
+    public function deleteCommandByOrder($order){
         $commandList = $this->GetCommandList();
         foreach($commandList as $key => $value)
         {
@@ -58,6 +63,7 @@ class CommandManager {
     }
     
     
+    //JSON COMMAND OPERATIONS
     public function sendCommand($cmd) {
         // Log the command being sent
         $this->logger->log("Wysłano komendę do ESP: " . $cmd);
