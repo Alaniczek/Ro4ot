@@ -1,5 +1,5 @@
 <?php
-class RobotManualFinder 
+class RobotKit 
 {
     public string $Ip;
     public string $Port;

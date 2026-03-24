@@ -22,12 +22,12 @@ class ManagerJSON {
     
     public function renameKey(string $oldKey, string $newKey) {
     $data = $this->read();
-    if ($data !== null && isset($data[$oldKey])) {
-        $data[$newKey] = $data[$oldKey];
-        unset($data[$oldKey]);
-        file_put_contents($this->path, json_encode($data, JSON_PRETTY_PRINT));
+        if ($data !== null && isset($data[$oldKey])) {
+            $data[$newKey] = $data[$oldKey];
+            unset($data[$oldKey]);
+            file_put_contents($this->path, json_encode($data, JSON_PRETTY_PRINT));
+        }
     }
-}
 
     public function changeValueKEY(string $key, $value) {
         $data = $this->read();

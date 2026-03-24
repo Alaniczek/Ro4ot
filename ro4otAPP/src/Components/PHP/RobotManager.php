@@ -1,10 +1,10 @@
 <?php
-require_once 'RobotManualFinder.php';
+require_once 'RobotKit.php';
 require_once 'CommandManager.php';
 require_once 'Logger.php';
 
-class RobotManualManager {
-    private ?RobotManualFinder $SelectedRobot;
+class RobotManager {
+    private ?RobotKit $SelectedRobot;
     private string $RobotUnitsPath = '../../Jsons/RobotUnits.json';
 
     private function __construct() {}
@@ -12,7 +12,7 @@ class RobotManualManager {
     public static function getInstance()
     {
         if (self::$instance === null) {
-            self::$instance = new RobotManualManager();
+            self::$instance = new RobotManager();
         }
         return self::$instance;
     }
@@ -43,7 +43,7 @@ class RobotManualManager {
     }
 
     //SELECTOR
-    public function getSelectedRobot(): RobotManualFinder
+    public function getSelectedRobot(): RobotKit
     {
         if ($this->SelectedRobot === null) {
             throw new Exception("Brak wybranego robota. Użyj najpierw SelectRobotByName().");
@@ -57,7 +57,7 @@ class RobotManualManager {
         
         foreach ($robotUnits as $unit) {
             if ($unit['Name'] === $name) {
-                $this->SelectedRobot = new RobotManualFinder($unit['IP'], $unit['Port']);
+                $this->SelectedRobot = new RobotKit($unit['IP'], $unit['Port']);
                 return;
             }
         }
