@@ -4,8 +4,9 @@
 const char* WIFI_SSID = "AkuKu";
 const char* WIFI_PASS = "12345678";
 const int LOCAL_PORT  = 4210;
-const char* SERVER_IP = "192.168.243.171"; 
-const uint16_t SERVER_PORT = 80;
+
+String SERVER_IP = "192.168.243.171";
+uint16_t SERVER_PORT = 80;
 
 WiFiUDP udp;
 WiFiClient client;
@@ -25,55 +26,45 @@ void loop() {
   int packetSize = udp.parsePacket();
   if (packetSize) {
     String cmd = udp.readString();
-    cmd.trim(); 
-    
+    cmd.trim();
+
     Serial.print("[UDP] Odebrano: ");
     Serial.println(cmd);
-    
+
     if (cmd == "A") {
       SendToPHP("test_wiadomosci");
-    }else if(cmd[0] == 'I')
-    {
+    }else if(cmd[0] == 'I') {
       String IP = "";
       String PORT = "";
       String ControllValue = "";
-      bool BoolIP = true; 
+      bool BoolIP = true;
 
-      Serial.println("TEST");
       for (int i = 2; i < cmd.length(); i++) {
-        Serial.println(cmd[i]);
-        if(cmd[i] != ' ' && BoolIP == true )
-        {
-          ControllValue += cmd[i];
-        }else if (cmd[i] == ' ' && BoolIP == true)
-        {
+        if (cmd[i] == ' ' && BoolIP) {
           IP = ControllValue;
-          BoolIP = false;
           ControllValue = "";
-        }else if (cmd[i] != ' ')
-        {
-          ControllValue += cmd[i];
-        }else if(cmd[i] == 'X')
-        {
-            PORT = ControllValue;
+          BoolIP = false;
+        } else if (cmd[i] == 'X') {
+        PORT = ControllValue;
+        } else if (cmd[i] != ' ') {
+        ControllValue += cmd[i];
         }
-      }
-      Serial.println("==1==");
-      Serial.println(PORT);
-      Serial.println(IP);
-      Serial.println("==1==");
-
-
     }
+    Serial.println("== Wynik ==");
+    Serial.print("IP:   "); Serial.println(IP);
+    Serial.print("PORT: "); Serial.println(PORT);
+    SERVER_IP = IP;
+    SERVER_PORT = PORT.toInt();
+  }
   }
 }
 
 void SendToPHP(String Message) {
   if (client.connect(SERVER_IP, SERVER_PORT)) {
     client.print("GET /Ro4ot/ro4otAPP/src/index.php?msg=" + Message + " HTTP/1.1\r\n" +
-                 "Host: " + String(SERVER_IP) + "\r\n" + 
+                 "Host: " + String(SERVER_IP) + "\r\n" +
                  "Connection: close\r\n\r\n");
-    
+
     unsigned long timeout = millis();
     while (client.connected() && millis() - timeout < 2000) {
       if (client.available()) {

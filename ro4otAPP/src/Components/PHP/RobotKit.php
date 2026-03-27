@@ -1,16 +1,16 @@
 <?php
-class RobotKit 
+class RobotKit
 {
     public string $Ip;
     public string $Port;
     public string $Name;
-    public string $Description;
+    public string $Model;
 
-    public function __construct($ip, $port, $name, $description) 
+    public function __construct($ip, $port, $name, $model)
     {
         $this->Ip = $ip;
         $this->Port = $port;
         $this->Name = $name;
-        $this->Description = $description;
+        $this->Model = $model;
     }
 }

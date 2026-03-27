@@ -1,85 +1,79 @@
 <?php
-// --- KONFIGURACJA ---
+session_start();
+
 require_once 'Components/PHP/Logger.php';
-require_once 'Components/PHP/CommandManager.php';
-
-$esp_ip = '192.168.243.143'; // ESP IP :> 
-$esp_port = 4210;
-
+require_once 'Components/PHP/QueueManager.php';
+require_once 'Components/PHP/RobotManager.php';
 
 $Logger = logger::getInstance();
 $Logger->changePath('Jsons/LogHistory.json');
 
-$CommandManager = new CommandManager($esp_ip, $esp_port, $Logger);
+$Queue = new QueueManager('Jsons/Queue.json');
 
+$robotManager = RobotManager::getInstance();
+$robotManager->changePath('Jsons/RobotUnits.json');
 
- //DODAĆ SYSTEM ZCZYTYWANIA "JAKI ROZKAZ PRZYSZEDŁ",
-//ABY MÓC GO SFORMATOWAĆ I WYSŁAĆ DO ODPOWIEDNIEGO ROBOTA :> 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['RM_SelectRobot'])) {
+        $_SESSION['selected_robot'] = $_POST['RM_Selected_Name'];
+    }
+}
+
+if (isset($_SESSION['selected_robot'])) {
+    $robotManager->selectRobotByName($_SESSION['selected_robot']);
+}
+
 if (isset($_GET['msg'])) {
-    $wpis = date("H:i:s") . " [ESP -> PHP]: " . $_GET['msg'] . "\n";
-    $Logger->log("ESP wysłał wiadomość: " . $_GET['msg']);
+    $Logger->log("ESP: " . $_GET['msg']);
     exit;
 }
 
-if (isset($_POST['action'])) {
-    $cmd = $_POST['action'];
-
-    if ($cmd === 'clear') {
-        $Logger->clearLog();
-    } 
-    else {
-        $wpis = date("H:i:s") . " [PHP -> ESP]: Wyslano komende " . $cmd . "\n";
-        //$Logger->log("Wysłano komendę do ESP: " . $cmd);
-        $CommandManager->sendCommand($cmd);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['action'])) {
+        if ($_POST['action'] === 'clear') {
+            $Logger->clearLog();
+        } else {
+            $robotManager->sendCommandToSelectedRobot($_POST['action']);
+        }
     }
 
-    // WebRefresh
-    header("Location: " . $_SERVER['PHP_SELF']); 
+    if (isset($_POST['AddQueue'])) {
+        $action = $_POST['AddQueue'];
+        if ($action === 'clearQueue') {
+            $Queue->clear();
+        } elseif ($action === 'startQueue') {
+            $cmd = $Queue->pop();
+            if ($cmd) {
+                $robotManager->sendCommandToSelectedRobot($cmd);
+                $Logger->log("Wysłano z kolejki: " . $cmd);
+            }
+        } else {
+            $Queue->add($action);
+        }
+    }
+
+    if (isset($_POST['Searcher'])) {
+        $robotManager->sendCommandToSelectedRobot("I {$_POST['PC_IP']} {$_POST['PC_port']}X");
+    }
+
+    if (isset($_POST['RM_Create'])) {
+        $ip = $_POST['RM_esp_ip'] ?? '';
+        $port = $_POST['RM_esp_port'] ?? '';
+        $name = $_POST['RM_Name'] ?? '';
+        $model = $_POST['RM_Model'] ?? 'UNKNOWN';
+
+        if (!empty($name) && !empty($ip) && !empty($port)) {
+            $robotManager->createRobot($name, $ip, $port, $model);
+        }
+    }
+
+    header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
 
-// IT'S NOT 100% QUEUE :< 
-if (isset($_POST['AddQueue']))
-{
-    $queueContent = json_decode(file_get_contents('Jsons/Queue.json'), true);
-
-    $action = $_POST['AddQueue'];
-    if($action === 'clearQueue')
-    {
-        file_put_contents('Jsons/Queue.json', json_encode([]));
-    }else if($action === 'startQueue') {
-        $order = $queueContent[0] ?? null;
-        if ($order) {
-            $CommandManager->sendCommand($order);
-            $wpis = date("H:i:s") . " [PHP -> ESP]: Wyslano komende " . $order . "\n";
-            $Logger->log("Wysłano komendę do ESP: " . $order);
-
-            array_shift($queueContent); 
-            file_put_contents('Jsons/Queue.json', json_encode($queueContent, JSON_PRETTY_PRINT));
-        }
-    }else
-    {
-        if (!is_array($queueContent)) {
-            $queueContent = [];
-        }
-        $queueContent[] = $action;
-        file_put_contents('Jsons/Queue.json', json_encode($queueContent, JSON_PRETTY_PRINT));
-    }
-}
-//<button type="submit" name="AddQueue" value="clearQueue" style="font-size: 20px; padding: 10px; background: #D3D3D3;">CLEAR QUEUE</button>
-//<button type="submit" name="AddQueue" value="startQueue" style="font-size: 20px; padding: 10px; background: #D3D3D3;">START QUEUE</button>
-if(isset($_POST['Searcher']))
-{
-    $ip = $_POST['esp_ip'];
-    $port = $_POST['esp_port'];
-    //echo "Wpisane IP: " . $ip . "<br>";
-    //echo "Wpisany Port: " . $port;
-    $CommandManager->sendCommand('I'. ' ' . $ip . ' ' . $port . 'X');
-    
-}
-
+$logs = $Logger->GiveEveryLogs();
+$currentQueue = $Queue->getItems();
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,69 +81,99 @@ if(isset($_POST['Searcher']))
     <title>Sterowanie Robotem</title>
 </head>
 <body>
-    <form method="post">
+<script src="Components/JS/ButtonMaker.js"></script>
+<script src="Components/JS/ButtonForQueue.js"></script>
+
+<h1>Panel Sterowania</h1>
+<form method="post">
+    <div class="CommandButtons"></div>
+    <button type="submit" name="action" value="clear"
+            style="font-size: 20px; padding: 10px; background: #D3D3D3; float: right;">LOG CLEAR
+    </button>
+</form>
+<hr>
+<h3>LOGI SYSTEMOWE</h3>
+<textarea style="width: 100%; height: 300px; font-family: monospace;">
+        <?php
+        // if (file_exists($plik_logow)) {
+        //     echo file_get_contents($plik_logow);
+        // }
+        $logger = logger::getInstance();
+        $logs = $logger->GiveEveryLogs();
+
+        foreach ($logs as $log) {
+            echo "[" . $log['data'] . "] " . $log['zdarzenie'] . "\n";
+        }
+
+        ?>
+    </textarea>
+
+
+<hr>
+<h2>ADD TOQUEUE</h2>
+<h5>IT IT NOT AUTOMATIC, YOU MUST CLICK TO SEND :> </h5>
+
+<form method="post">
+    <div class="QueueButtons"></div>
+    <button type="submit" name="AddQueue" value="clearQueue"
+            style="font-size: 20px; padding: 10px; background: #D3D3D3;">CLEAR QUEUE
+    </button>
+    <button type="submit" name="AddQueue" value="startQueue"
+            style="font-size: 20px; padding: 10px; background: #D3D3D3;">START QUEUE
+    </button>
+</form>
+<textarea name="QueueContent" id="QueueContent" style="width: 50%; height: 100px; font-family: monospace;">
+        <?php
+        $jsonFile = 'Jsons/Queue.json';
+
+        if (file_exists($jsonFile)) {
+            $content = file_get_contents($jsonFile);
+            $queue = json_decode($content, true);
+            echo json_encode(is_array($queue) ? $queue : []);
+        } else {
+            echo json_encode([]);
+        }
+        ?>
+    </textarea>
+
+
+<script>
+    const maker = new ButtonMakerFromJSON('Jsons/Command.json');
+
+    // Używasz poprawnej metody 'render' z odpowiednim parametrem name
+    maker.render('.CommandButtons', 'action');
+    maker.render('.QueueButtons', 'AddQueue');
+</script>
+
+
+<form method="post">
     <h4>IP of ESP</h4>
-    <input type="text" placeholder="Wpisz IP" name="esp_ip">
-    <input type="text" placeholder="Wpisz port" name="esp_port">
+    <input type="text" placeholder="Wpisz IP ESP" name="PC_IP">
+<!--    <input type="text" placeholder="Wpisz port" name="esp_port">-->
+    <input type="text" placeholder="Wpisz port odbioru PC" name="PC_port">
     <input type="submit" value="Send_IP_PORT" name="Searcher">
 </form>
-
-    <script src="Components/JS/ButtonMaker.js"></script>
-    <script src="Components/JS/ButtonForQueue.js"></script>
-
-    <h1>Panel Sterowania</h1>
-    <form method="post">
-        <div class="CommandButtons"></div>
-        <button type="submit" name="action" value="clear" style="font-size: 20px; padding: 10px; background: #D3D3D3; float: right;">LOG CLEAR</button>
-    </form>
-    <hr>
-    <h3>LOGI SYSTEMOWE</h3>
-    <textarea style="width: 100%; height: 300px; font-family: monospace;">
-        <?php 
-            // if (file_exists($plik_logow)) {
-            //     echo file_get_contents($plik_logow);
-            // }
-            $logger = logger::getInstance();
-            $logs = $logger->GiveEveryLogs();
-
-            foreach ($logs as $log) {
-                echo "[" . $log['data'] . "] " . $log['zdarzenie'] . "\n";
-            }
-
-        ?>
-    </textarea>
-    
-
-    <hr>
-    <h2>ADD TOQUEUE</h2>
-    <h5>IT IT NOT AUTOMATIC, YOU MUST CLICK TO SEND :> </h5>
-    
-    <form method="post">
-        <div class="QueueButtons"></div>
-        <button type="submit" name="AddQueue" value="clearQueue" style="font-size: 20px; padding: 10px; background: #D3D3D3;">CLEAR QUEUE</button>
-        <button type="submit" name="AddQueue" value="startQueue" style="font-size: 20px; padding: 10px; background: #D3D3D3;">START QUEUE</button>
-    </form>
-    <textarea name="QueueContent" id="QueueContent" style="width: 50%; height: 100px; font-family: monospace;">
+<form method="post">
+    <!--    RM = ROBOT MAKER-->
+    <h4>RobotMaker</h4>
+    <input type="text" placeholder="Wpisz IP" name="RM_esp_ip" required>
+    <input type="text" placeholder="Wpisz port" name="RM_esp_port" required>
+    <input type="text" placeholder="Wpisz Nazwe BEZ SPACJI!" name="RM_Name" required>
+    <input type="text" placeholder="Wpisz MODEL" name="RM_Model">
+    <input type="submit" value="Dodaj Robota" name="RM_Create">
+</form>
+<form method="post">
+    <h4>Wybierz Robota</h4>
+    <select name="RM_Selected_Name" required>
         <?php
-            $jsonFile = 'Jsons/Queue.json';
+        $robots = $robotManager->getRobotUnits();
+        foreach ($robots as $robot):
+            ?>
+            <option value="<?= $robot['Name'] ?>"><?= $robot['Name'] ?></option>
+        <?php endforeach; ?>
+    </select>
+    <input type="submit" value="Wybierz" name="RM_SelectRobot">
+</form>
 
-            if (file_exists($jsonFile)) {
-                $content = file_get_contents($jsonFile);
-                $queue = json_decode($content, true);
-                echo json_encode(is_array($queue) ? $queue : []);
-            } else {
-                echo json_encode([]);
-            }
-        ?>
-    </textarea>
-
-
-    <script>
-       const maker = new ButtonMakerFromJSON('Jsons/Command.json');
-    
-    // Używasz poprawnej metody 'render' z odpowiednim parametrem name
-        maker.render('.CommandButtons', 'action'); 
-        maker.render('.QueueButtons', 'AddQueue');
-    </script>
 </body>
 </html>

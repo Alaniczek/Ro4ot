@@ -1,58 +1,86 @@
 [
     {
-        "data": "2026-03-24 12:10:16",
+        "data": "2026-03-27 13:20:33",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
     },
     {
-        "data": "2026-03-24 12:10:17",
+        "data": "2026-03-27 13:20:34",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
     },
     {
-        "data": "2026-03-24 12:10:17",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
-    },
-    {
-        "data": "2026-03-24 12:10:18",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
-    },
-    {
-        "data": "2026-03-24 12:10:19",
+        "data": "2026-03-27 13:20:35",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
     },
     {
-        "data": "2026-03-24 12:10:19",
+        "data": "2026-03-27 13:20:36",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
     },
     {
-        "data": "2026-03-24 12:10:20",
+        "data": "2026-03-27 13:20:36",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
     },
     {
-        "data": "2026-03-24 12:10:20",
+        "data": "2026-03-27 13:20:53",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-27 13:20:53",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
     },
     {
-        "data": "2026-03-24 12:10:20",
+        "data": "2026-03-27 13:20:54",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
     },
     {
-        "data": "2026-03-24 12:10:20",
+        "data": "2026-03-27 13:20:54",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-27 13:20:55",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-27 13:20:57",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: D"
+    },
+    {
+        "data": "2026-03-27 13:21:32",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
     },
     {
-        "data": "2026-03-24 12:10:21",
+        "data": "2026-03-27 13:21:34",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
     },
     {
-        "data": "2026-03-24 12:10:21",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
+        "data": "2026-03-27 13:23:12",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 127.0.0.1 80X"
     },
     {
-        "data": "2026-03-24 12:12:17",
+        "data": "2026-03-27 13:25:54",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 192.168.243.171 80X"
+    },
+    {
+        "data": "2026-03-27 13:25:55",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-27 13:25:56",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
     },
     {
-        "data": "2026-03-24 12:12:17",
+        "data": "2026-03-27 13:25:56",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-27 13:25:57",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
+    },
+    {
+        "data": "2026-03-27 13:26:02",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-03-27 13:26:03",
         "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
     }
 ]

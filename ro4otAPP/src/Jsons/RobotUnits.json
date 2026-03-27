@@ -4,7 +4,23 @@
         "Port": "EXAMPLE",
         "Name": "EXAMPLE",
         "MODEL": "EXAMPLE",
-        "LastStatus": "HOUR/DATE",
+        "LastStatus": "HOUR\/DATE",
+        "IsOnline": false
+    },
+    {
+        "IP": "192.168.243.143",
+        "Port": "4210",
+        "Name": "Drimi",
+        "MODEL": "C1A1",
+        "LastStatus": "2026-03-27 11:28:24",
+        "IsOnline": false
+    },
+    {
+        "IP": "123.123.123.123",
+        "Port": "222",
+        "Name": "XXX",
+        "MODEL": "SD",
+        "LastStatus": "2026-03-27 12:16:58",
         "IsOnline": false
     }
 ]
