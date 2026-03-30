@@ -6,7 +6,7 @@ const char* WIFI_PASS = "12345678";
 const int LOCAL_PORT  = 4210;
 
 String SERVER_IP = "192.168.243.171";
-uint16_t SERVER_PORT = 80;
+uint16_t SERVER_PORT = 4040;
 
 WiFiUDP udp;
 WiFiClient client;
@@ -32,8 +32,12 @@ void loop() {
     Serial.println(cmd);
 
     if (cmd == "A") {
-      SendToPHP("test_wiadomosci");
-    }else if(cmd[0] == 'I') {
+      SendToPHP("test_wiadomosci A");
+    }else if(cmd == "D")
+    {
+      SendToPHP("TEST D");
+    } 
+    else if(cmd[0] == 'I') {
       String IP = "";
       String PORT = "";
       String ControllValue = "";
@@ -45,35 +49,46 @@ void loop() {
           ControllValue = "";
           BoolIP = false;
         } else if (cmd[i] == 'X') {
-        PORT = ControllValue;
+          PORT = ControllValue;
         } else if (cmd[i] != ' ') {
-        ControllValue += cmd[i];
+          ControllValue += cmd[i];
         }
+      }
+      
+      IP.trim();
+      PORT.trim();
+      
+      SERVER_IP = IP;
+      SERVER_PORT = PORT.toInt();
+
+      Serial.println("== Wynik ==");
+      Serial.print("IP:   "); Serial.println(SERVER_IP);
+      Serial.print("PORT: "); Serial.println(SERVER_PORT);
     }
-    Serial.println("== Wynik ==");
-    Serial.print("IP:   "); Serial.println(IP);
-    Serial.print("PORT: "); Serial.println(PORT);
-    SERVER_IP = IP;
-    SERVER_PORT = PORT.toInt();
-  }
   }
 }
 
 void SendToPHP(String Message) {
-  if (client.connect(SERVER_IP, SERVER_PORT)) {
-    client.print("GET /Ro4ot/ro4otAPP/src/index.php?msg=" + Message + " HTTP/1.1\r\n" +
-                 "Host: " + String(SERVER_IP) + "\r\n" +
-                 "Connection: close\r\n\r\n");
-
-    unsigned long timeout = millis();
-    while (client.connected() && millis() - timeout < 2000) {
-      if (client.available()) {
-        client.stop();
-        return;
-      }
-    }
-    client.stop();
-  } else {
-    Serial.println("[BLAD] Brak polaczenia z PHP");
-  }
+  udp.beginPacket(SERVER_IP.c_str(), SERVER_PORT);
+  udp.print(Message);
+  udp.endPacket();
 }
+// void SendToPHP(String Message) {
+//   if (client.connect(SERVER_IP, SERVER_PORT)) {
+//     client.print("GET /Ro4ot/ro4otAPP/src/index.php?msg=" + Message + " HTTP/1.1\r\n");
+//     client.print("Host: " + SERVER_IP + "\r\n");
+//     client.print("Connection: close\r\n\r\n");
+
+//     unsigned long timeout = millis();
+//     while (client.connected() && millis() - timeout < 2000) {
+//       while (client.available()) {
+//         String line = client.readStringUntil('\n');
+//         Serial.println(line);
+//         timeout = millis();
+//       }
+//     }
+//     client.stop();
+//   } else {
+//     Serial.println("[BLAD] Brak polaczenia z PHP");
+//   }
+// }

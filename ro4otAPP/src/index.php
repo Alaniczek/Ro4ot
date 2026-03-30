@@ -23,11 +23,6 @@ if (isset($_SESSION['selected_robot'])) {
     $robotManager->selectRobotByName($_SESSION['selected_robot']);
 }
 
-if (isset($_GET['msg'])) {
-    $Logger->log("ESP: " . $_GET['msg']);
-    exit;
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         if ($_POST['action'] === 'clear') {
@@ -70,20 +65,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
-
+echo $_SERVER['SERVER_PORT'];
 $logs = $Logger->GiveEveryLogs();
 $currentQueue = $Queue->getItems();
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="eu">
 <head>
     <meta charset="UTF-8">
     <title>Sterowanie Robotem</title>
 </head>
 <body>
 <script src="Components/JS/ButtonMaker.js"></script>
-<script src="Components/JS/ButtonForQueue.js"></script>
-
 <h1>Panel Sterowania</h1>
 <form method="post">
     <div class="CommandButtons"></div>
@@ -149,7 +142,7 @@ $currentQueue = $Queue->getItems();
 <form method="post">
     <h4>IP of ESP</h4>
     <input type="text" placeholder="Wpisz IP ESP" name="PC_IP">
-<!--    <input type="text" placeholder="Wpisz port" name="esp_port">-->
+    <!--    <input type="text" placeholder="Wpisz port" name="esp_port">-->
     <input type="text" placeholder="Wpisz port odbioru PC" name="PC_port">
     <input type="submit" value="Send_IP_PORT" name="Searcher">
 </form>
