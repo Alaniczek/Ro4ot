@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "data": "2026-04-01 08:58:47",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: T"
+    },
+    {
+        "data": "2026-04-01 08:58:47",
+        "zdarzenie": "Wys\u0142ano z kolejki: T"
+    },
+    {
+        "data": "2026-04-01 08:58:48",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: Tyyy"
+    },
+    {
+        "data": "2026-04-01 08:58:48",
+        "zdarzenie": "Wys\u0142ano z kolejki: Tyyy"
+    }
+]

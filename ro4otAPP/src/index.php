@@ -1,9 +1,9 @@
 <?php
-session_start();
-
 require_once 'Components/PHP/Logger.php';
 require_once 'Components/PHP/QueueManager.php';
 require_once 'Components/PHP/RobotManager.php';
+
+session_start();
 
 $Logger = logger::getInstance();
 $Logger->changePath('Jsons/LogHistory.json');
@@ -74,6 +74,8 @@ $currentQueue = $Queue->getItems();
 <head>
     <meta charset="UTF-8">
     <title>Sterowanie Robotem</title>
+    <link rel="stylesheet" href="Components/CSS/SettingsMenu.css">
+    <link rel="stylesheet" href="Components/CSS/QueueAndActiveRobots.css">
 </head>
 <body>
 <script src="Components/JS/ButtonMaker.js"></script>
@@ -103,32 +105,70 @@ $currentQueue = $Queue->getItems();
 
 
 <hr>
-<h2>ADD TOQUEUE</h2>
-<h5>IT IT NOT AUTOMATIC, YOU MUST CLICK TO SEND :> </h5>
+<div class="QueueAndActiveRobots">
+    <div id="QueueSection">
+        <h2>ADD TOQUEUE</h2>
+        <h5>IT IS NOT AUTOMATIC, YOU MUST CLICK TO SEND :> </h5>
 
-<form method="post">
-    <div class="QueueButtons"></div>
-    <button type="submit" name="AddQueue" value="clearQueue"
-            style="font-size: 20px; padding: 10px; background: #D3D3D3;">CLEAR QUEUE
-    </button>
-    <button type="submit" name="AddQueue" value="startQueue"
-            style="font-size: 20px; padding: 10px; background: #D3D3D3;">START QUEUE
-    </button>
-</form>
-<textarea name="QueueContent" id="QueueContent" style="width: 50%; height: 100px; font-family: monospace;">
-        <?php
-        $jsonFile = 'Jsons/Queue.json';
+        <form method="post">
+            <div class="QueueButtons"></div>
+            <button type="submit" name="AddQueue" value="clearQueue" id="SubmitQueue">CLEAR QUEUE</button>
+            <button type="submit" name="AddQueue" value="startQueue" id="StartQueue">START QUEUE</button>
+        </form>
+        <textarea name="QueueContent" id="QueueContent" style="width: 50%; height: 100px; font-family: monospace;">
+            <?php
+            $jsonFile = 'Jsons/Queue.json';
 
-        if (file_exists($jsonFile)) {
-            $content = file_get_contents($jsonFile);
-            $queue = json_decode($content, true);
-            echo json_encode(is_array($queue) ? $queue : []);
-        } else {
-            echo json_encode([]);
-        }
-        ?>
+            if (file_exists($jsonFile)) {
+                $content = file_get_contents($jsonFile);
+                $queue = json_decode($content, true);
+                echo json_encode(is_array($queue) ? $queue : []);
+            } else {
+                echo json_encode([]);
+            }
+            ?>
     </textarea>
-
+    </div>
+    <div class="ActiveRobotsSection">
+        <h3>ACTIVE ROBOTS - SOON -</h3>
+    </div>
+</div>
+<div class="SettingsMenu">
+    <div id="IP_Port_Form">
+        <form method="post">
+            <h4>Send Ip and port of your PC to ESP</h4>
+            <input type="text" placeholder="Wpisz IP ESP" name="PC_IP">
+            <!--    <input type="text" placeholder="Wpisz port" name="esp_port">-->
+            <input type="text" placeholder="Wpisz port odbioru PC" name="PC_port">
+            <input type="submit" value="Send_IP_PORT" name="Searcher">
+        </form>
+    </div>
+    <div id="RobotMaker_Form">
+        <form method="post">
+            <!--    RM = ROBOT MAKER-->
+            <h4>RobotMaker</h4>
+            <input type="text" placeholder="Wpisz IP" name="RM_esp_ip" required>
+            <input type="text" placeholder="Wpisz port" name="RM_esp_port" required>
+            <input type="text" placeholder="Wpisz Nazwe BEZ SPACJI!" name="RM_Name" required>
+            <input type="text" placeholder="Wpisz MODEL" name="RM_Model">
+            <input type="submit" value="Dodaj Robota" name="RM_Create">
+        </form>
+    </div>
+    <div id="RobotSelector_Form">
+        <form method="post">
+            <h4>Wybierz Robota</h4>
+            <select name="RM_Selected_Name" required>
+                <?php
+                $robots = $robotManager->getRobotUnits();
+                foreach ($robots as $robot):
+                    ?>
+                    <option value="<?= $robot['Name'] ?>"><?= $robot['Name'] ?></option>
+                <?php endforeach; ?>
+            </select>
+            <input type="submit" value="Wybierz" name="RM_SelectRobot">
+        </form>
+    </div>
+</div>
 
 <script>
     const maker = new ButtonMakerFromJSON('Jsons/Command.json');
@@ -137,36 +177,5 @@ $currentQueue = $Queue->getItems();
     maker.render('.CommandButtons', 'action');
     maker.render('.QueueButtons', 'AddQueue');
 </script>
-
-
-<form method="post">
-    <h4>IP of ESP</h4>
-    <input type="text" placeholder="Wpisz IP ESP" name="PC_IP">
-    <!--    <input type="text" placeholder="Wpisz port" name="esp_port">-->
-    <input type="text" placeholder="Wpisz port odbioru PC" name="PC_port">
-    <input type="submit" value="Send_IP_PORT" name="Searcher">
-</form>
-<form method="post">
-    <!--    RM = ROBOT MAKER-->
-    <h4>RobotMaker</h4>
-    <input type="text" placeholder="Wpisz IP" name="RM_esp_ip" required>
-    <input type="text" placeholder="Wpisz port" name="RM_esp_port" required>
-    <input type="text" placeholder="Wpisz Nazwe BEZ SPACJI!" name="RM_Name" required>
-    <input type="text" placeholder="Wpisz MODEL" name="RM_Model">
-    <input type="submit" value="Dodaj Robota" name="RM_Create">
-</form>
-<form method="post">
-    <h4>Wybierz Robota</h4>
-    <select name="RM_Selected_Name" required>
-        <?php
-        $robots = $robotManager->getRobotUnits();
-        foreach ($robots as $robot):
-            ?>
-            <option value="<?= $robot['Name'] ?>"><?= $robot['Name'] ?></option>
-        <?php endforeach; ?>
-    </select>
-    <input type="submit" value="Wybierz" name="RM_SelectRobot">
-</form>
-
 </body>
 </html>
