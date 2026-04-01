@@ -1,64 +1,19 @@
-/* Główny kontener */
-.SettingsMenu {
+.SettingsMenu
+{
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
-    font-family: sans-serif;
-    background-color: #f9fafb;
-    padding: 20px;
-    border-radius: 12px;
+    align-items: stretch;
 }
 
-/* Tylko divy wewnątrz SettingsMenu */
-.SettingsMenu > div {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    flex: 1 1 250px;
+#IP_Port_Form
+{
+    flex: 1;
 }
-
-/* Tylko nagłówki h4 wewnątrz SettingsMenu */
-.SettingsMenu h4 {
-    margin: 0 0 15px 0;
-    color: #1f2937;
-    font-size: 18px;
+#RobotMaker_Form
+{
+    flex: 1;
 }
-
-/* Tylko formularze wewnątrz SettingsMenu */
-.SettingsMenu form {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-/* Tylko inputy i selecty wewnątrz SettingsMenu */
-.SettingsMenu input[type="text"],
-.SettingsMenu select {
-    padding: 10px;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
-    font-size: 14px;
-    outline: none;
-}
-
-.SettingsMenu input[type="text"]:focus,
-.SettingsMenu select:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
-}
-
-/* Tylko przyciski submit wewnątrz SettingsMenu */
-.SettingsMenu input[type="submit"] {
-    background-color: #3b82f6;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.SettingsMenu input[type="submit"]:hover {
-    background-color: #2563eb;
+#RobotSelector_Form
+{
+    flex: 1;
 }

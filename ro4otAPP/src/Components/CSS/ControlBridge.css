@@ -1,0 +1,13 @@
+.ControlBridge {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.ControlSection {
+    flex: 3;
+}
+
+.QueueSection {
+    flex: 2;
+}

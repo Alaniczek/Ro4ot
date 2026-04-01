@@ -50,6 +50,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['Searcher'])) {
         $robotManager->sendCommandToSelectedRobot("I {$_POST['PC_IP']} {$_POST['PC_port']}X");
     }
+//    else if(isset($_POST['AutoSearcher'])){
+//        $localIP = getHostByName(getHostName());
+//        $robotManager->sendCommandToSelectedRobot("I {$localIP} {$_POST['PC_port']}X");
+//    }
 
     if (isset($_POST['RM_Create'])) {
         $ip = $_POST['RM_esp_ip'] ?? '';
@@ -75,38 +79,33 @@ $currentQueue = $Queue->getItems();
     <meta charset="UTF-8">
     <title>Sterowanie Robotem</title>
     <link rel="stylesheet" href="Components/CSS/SettingsMenu.css">
-    <link rel="stylesheet" href="Components/CSS/QueueAndActiveRobots.css">
+    <link rel="stylesheet" href="Components/CSS/ControlBridge.css">
 </head>
 <body>
 <script src="Components/JS/ButtonMaker.js"></script>
 <h1>Panel Sterowania</h1>
-<form method="post">
-    <div class="CommandButtons"></div>
-    <button type="submit" name="action" value="clear"
-            style="font-size: 20px; padding: 10px; background: #D3D3D3; float: right;">LOG CLEAR
-    </button>
-</form>
-<hr>
-<h3>LOGI SYSTEMOWE</h3>
-<textarea style="width: 100%; height: 300px; font-family: monospace;">
+<div class="ControlBridge">
+    <div class="ControlSection">
+        <form method="post">
+            <div class="CommandButtons"></div>
+            <button type="submit" name="action" value="clear"
+                    style="font-size: 20px; padding: 10px; background: #D3D3D3; float: right;">LOG CLEAR
+            </button>
+        </form>
+        <h3>LOGI SYSTEMOWE</h3>
+        <textarea style="width: 100%; height: 300px; font-family: monospace;">
         <?php
-        // if (file_exists($plik_logow)) {
-        //     echo file_get_contents($plik_logow);
-        // }
         $logger = logger::getInstance();
         $logs = $logger->GiveEveryLogs();
 
         foreach ($logs as $log) {
             echo "[" . $log['data'] . "] " . $log['zdarzenie'] . "\n";
         }
-
         ?>
-    </textarea>
+        </textarea>
+    </div>
 
-
-<hr>
-<div class="QueueAndActiveRobots">
-    <div id="QueueSection">
+    <div class="QueueSection">
         <h2>ADD TOQUEUE</h2>
         <h5>IT IS NOT AUTOMATIC, YOU MUST CLICK TO SEND :> </h5>
 
@@ -115,24 +114,26 @@ $currentQueue = $Queue->getItems();
             <button type="submit" name="AddQueue" value="clearQueue" id="SubmitQueue">CLEAR QUEUE</button>
             <button type="submit" name="AddQueue" value="startQueue" id="StartQueue">START QUEUE</button>
         </form>
-        <textarea name="QueueContent" id="QueueContent" style="width: 50%; height: 100px; font-family: monospace;">
-            <?php
-            $jsonFile = 'Jsons/Queue.json';
+        <textarea name="QueueContent" id="QueueContent" style="width: 100%; height: 100px; font-family: monospace;">
+        <?php
+        $jsonFile = 'Jsons/Queue.json';
 
-            if (file_exists($jsonFile)) {
-                $content = file_get_contents($jsonFile);
-                $queue = json_decode($content, true);
-                echo json_encode(is_array($queue) ? $queue : []);
-            } else {
-                echo json_encode([]);
-            }
-            ?>
-    </textarea>
-    </div>
-    <div class="ActiveRobotsSection">
-        <h3>ACTIVE ROBOTS - SOON -</h3>
+        if (file_exists($jsonFile)) {
+            $content = file_get_contents($jsonFile);
+            $queue = json_decode($content, true);
+            echo json_encode(is_array($queue) ? $queue : []);
+        } else {
+            echo json_encode([]);
+        }
+        ?>
+        </textarea>
     </div>
 </div>
+
+<div class="ActiveRobotsSection">
+    <h3>ACTIVE ROBOTS - SOON -</h3>
+</div>
+
 <div class="SettingsMenu">
     <div id="IP_Port_Form">
         <form method="post">
@@ -141,6 +142,7 @@ $currentQueue = $Queue->getItems();
             <!--    <input type="text" placeholder="Wpisz port" name="esp_port">-->
             <input type="text" placeholder="Wpisz port odbioru PC" name="PC_port">
             <input type="submit" value="Send_IP_PORT" name="Searcher">
+            <input type="submit" value="Auto_Send_IP_PORT" name="AutoSearcher">
         </form>
     </div>
     <div id="RobotMaker_Form">

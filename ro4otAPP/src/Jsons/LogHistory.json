@@ -1,18 +1,38 @@
 [
     {
-        "data": "2026-04-01 08:58:47",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: T"
+        "data": "2026-04-01 12:20:45",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
     },
     {
-        "data": "2026-04-01 08:58:47",
-        "zdarzenie": "Wys\u0142ano z kolejki: T"
+        "data": "2026-04-01 12:20:46",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
     },
     {
-        "data": "2026-04-01 08:58:48",
-        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: Tyyy"
+        "data": "2026-04-01 12:31:18",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
     },
     {
-        "data": "2026-04-01 08:58:48",
-        "zdarzenie": "Wys\u0142ano z kolejki: Tyyy"
+        "data": "2026-04-01 12:31:19",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
+    },
+    {
+        "data": "2026-04-01 12:31:19",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
+    },
+    {
+        "data": "2026-04-01 12:31:22",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-04-01 12:31:22",
+        "zdarzenie": "Wys\u0142ano z kolejki: W"
+    },
+    {
+        "data": "2026-04-01 12:31:22",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-04-01 12:31:22",
+        "zdarzenie": "Wys\u0142ano z kolejki: W"
     }
 ]
