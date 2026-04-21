@@ -25,7 +25,7 @@ class ManagerJSON {
         if ($data !== null && isset($data[$oldKey])) {
             $data[$newKey] = $data[$oldKey];
             unset($data[$oldKey]);
-            file_put_contents($this->path, json_encode($data, JSON_PRETTY_PRINT));
+             file_put_contents($this->path, json_encode($data, JSON_PRETTY_PRINT));
         }
     }
 

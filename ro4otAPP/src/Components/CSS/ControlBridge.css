@@ -6,8 +6,10 @@
 
 .ControlSection {
     flex: 3;
+    /*background-color: #bf0000;*/
 }
 
 .QueueSection {
     flex: 2;
+    /*background-color: #8e5353;*/
 }

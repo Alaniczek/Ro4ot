@@ -49,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['Searcher'])) {
         $robotManager->sendCommandToSelectedRobot("I {$_POST['PC_IP']} {$_POST['PC_port']}X");
+    }else if(isset($_POST['ForceSender'])){
+        $robotManager->forcePingToAllRobots();
     }
 //    else if(isset($_POST['AutoSearcher'])){
 //        $localIP = getHostByName(getHostName());
@@ -69,7 +71,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
-echo $_SERVER['SERVER_PORT'];
+//echo $_SERVER['SERVER_PORT'];
+//echo '<br>';
+//echo $_SERVER['REMOTE_ADDR'];
+//echo '<br>';
+//echo file_get_contents('https://api.ipify.org');
+//echo '<br>';
+//echo getHostByName(getHostName()); // LAN
+
+
 $logs = $Logger->GiveEveryLogs();
 $currentQueue = $Queue->getItems();
 ?>
@@ -80,12 +90,15 @@ $currentQueue = $Queue->getItems();
     <title>Sterowanie Robotem</title>
     <link rel="stylesheet" href="Components/CSS/SettingsMenu.css">
     <link rel="stylesheet" href="Components/CSS/ControlBridge.css">
+    <link rel="stylesheet" href="Components/CSS/RobotsList.css">
 </head>
 <body>
 <script src="Components/JS/ButtonMaker.js"></script>
-<h1>Panel Sterowania</h1>
+<script src="Components/JS/ActiveRobots.js"></script>
 <div class="ControlBridge">
     <div class="ControlSection">
+        <h1>Panel Sterowania</h1>
+
         <form method="post">
             <div class="CommandButtons"></div>
             <button type="submit" name="action" value="clear"
@@ -130,19 +143,18 @@ $currentQueue = $Queue->getItems();
     </div>
 </div>
 
-<div class="ActiveRobotsSection">
-    <h3>ACTIVE ROBOTS - SOON -</h3>
-</div>
-
 <div class="SettingsMenu">
     <div id="IP_Port_Form">
         <form method="post">
-            <h4>Send Ip and port of your PC to ESP</h4>
-            <input type="text" placeholder="Wpisz IP ESP" name="PC_IP">
+            <h4>Send Ip and port of your PC to DEVICE</h4>
+            <input type="text" placeholder="Wpisz IP ESP"
+                   value="<?php echo getHostByName(getHostName()); // LAN ?>" name="PC_IP">
             <!--    <input type="text" placeholder="Wpisz port" name="esp_port">-->
-            <input type="text" placeholder="Wpisz port odbioru PC" name="PC_port">
+            <input type="text" placeholder="Wpisz port odbioru PC"
+                   value="<?php echo $_SERVER['SERVER_PORT']; ?>" name="PC_port">
             <input type="submit" value="Send_IP_PORT" name="Searcher">
-            <input type="submit" value="Auto_Send_IP_PORT" name="AutoSearcher">
+            <input type="submit" value="Send_To_All_Robots" name="ForceSender">
+            <!--            <input type="submit" value="Auto_Send_IP_PORT" name="AutoSearcher">-->
         </form>
     </div>
     <div id="RobotMaker_Form">
@@ -171,13 +183,20 @@ $currentQueue = $Queue->getItems();
         </form>
     </div>
 </div>
+<div class="ActiveRobotsSection">
+    <h3>ACTIVE ROBOTS - SOON -</h3>
 
+</div>
 <script>
     const maker = new ButtonMakerFromJSON('Jsons/Command.json');
 
     // Używasz poprawnej metody 'render' z odpowiednim parametrem name
     maker.render('.CommandButtons', 'action');
     maker.render('.QueueButtons', 'AddQueue');
+</script>
+<script>
+    const RobotUnitsClass = new ActiveRobots('Jsons/RobotUnits.json');
+    RobotUnitsClass.PrintRobots();
 </script>
 </body>
 </html>

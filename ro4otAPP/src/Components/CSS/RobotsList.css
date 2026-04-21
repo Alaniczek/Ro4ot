@@ -1,0 +1,12 @@
+.ActiveRobotsSection
+{
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    width: 100%;
+
+}
+.ActiveRobots
+{
+    flex: 1;
+}
