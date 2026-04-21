@@ -8,6 +8,9 @@ const int LOCAL_PORT  = 4210;
 String SERVER_IP = "192.168.243.171";
 uint16_t SERVER_PORT = 4040;
 
+unsigned long previousMillis = 0;
+const long interval = 15000;
+
 WiFiUDP udp;
 WiFiClient client;
 
@@ -23,6 +26,13 @@ void setup() {
 }
 
 void loop() {
+    unsigned long currentMillis = millis();
+
+     if (currentMillis - previousMillis >= interval) {
+       previousMillis = currentMillis;
+        SendToPHP("$E8A3");
+      }
+
   int packetSize = udp.parsePacket();
   if (packetSize) {
     String cmd = udp.readString();
@@ -64,6 +74,7 @@ void loop() {
       Serial.println("== Wynik ==");
       Serial.print("IP:   "); Serial.println(SERVER_IP);
       Serial.print("PORT: "); Serial.println(SERVER_PORT);
+      SendToPHP("$E8A3 IS CONNECTED");
     }
   }
 }
@@ -73,22 +84,3 @@ void SendToPHP(String Message) {
   udp.print(Message);
   udp.endPacket();
 }
-// void SendToPHP(String Message) {
-//   if (client.connect(SERVER_IP, SERVER_PORT)) {
-//     client.print("GET /Ro4ot/ro4otAPP/src/index.php?msg=" + Message + " HTTP/1.1\r\n");
-//     client.print("Host: " + SERVER_IP + "\r\n");
-//     client.print("Connection: close\r\n\r\n");
-
-//     unsigned long timeout = millis();
-//     while (client.connected() && millis() - timeout < 2000) {
-//       while (client.available()) {
-//         String line = client.readStringUntil('\n');
-//         Serial.println(line);
-//         timeout = millis();
-//       }
-//     }
-//     client.stop();
-//   } else {
-//     Serial.println("[BLAD] Brak polaczenia z PHP");
-//   }
-// }

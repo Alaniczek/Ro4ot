@@ -49,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (isset($_POST['Searcher'])) {
         $robotManager->sendCommandToSelectedRobot("I {$_POST['PC_IP']} {$_POST['PC_port']}X");
-    }else if(isset($_POST['ForceSender'])){
-        $robotManager->forcePingToAllRobots();
+    } else if(isset($_POST['ForceSender'])){
+        $robotManager->forcePingToAllRobots($_POST['PC_IP'], $_POST['PC_port']);
     }
 //    else if(isset($_POST['AutoSearcher'])){
 //        $localIP = getHostByName(getHostName());

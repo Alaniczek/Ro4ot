@@ -1,2 +1,5 @@
 logbook from junior programmer:
 DO NOT EVEN ADD MORE THAN ONE LETTER IN ORDER (command.json), CAUSE IT WILL DESTROY EVERYTHING
+
+RobotUnits:
+MODEL must be 4 sign :D

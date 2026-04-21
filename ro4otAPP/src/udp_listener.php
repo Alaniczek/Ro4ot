@@ -12,6 +12,11 @@ while (true) {
     $pkt = stream_socket_recvfrom($socket, 1024, 0, $peer);
     if ($pkt) {
         $logger->log(trim($pkt));
+        if($pkt[0] == '$')
+        {
+            $logger->log($pkt[1] . $pkt[2] . $pkt[3] . $pkt[4]);
+            // DO DODANIA MODUŁ SPRAWDZAJĄCY W JSON CZY MODEL ISTNIEJE I AKTUALIZOWANIA GO :D
+        }
         echo date('H:i:s') . ' ' . trim($pkt) . "\n";
     }
 }

@@ -86,18 +86,16 @@ class RobotManager
         }
         $this->commandManager->sendCommand($command);
     }
-    public function forcePingToAllRobots(): void
+    public function forcePingToAllRobots(string $ip, string $port): void
     {
         $Robots = $this->getRobotUnits();
-        $logger = logger::getInstance();
-        $serverIp = getHostByName(getHostName());
-        $serverPort = $_SERVER['SERVER_PORT'];
-        $pingCommand = 'I ' . $serverIp . ' ' . $serverPort;
+        $logger = Logger::getInstance();
+        $pingCommand = "I " . $ip . " " . $port . "X";
 
         foreach ($Robots as $units) {
-            $this->commandManager = new CommandManager($units['IP'], (int)$units['Port'], $logger);
+            $cmdManager = new CommandManager($units['IP'], (int)$units['Port'], $logger);
             $logger->log("Wysłano ping do robota: " . $units['Name'] . " (" . $units['IP'] . ":" . $units['Port'] . ")");
-            $this->commandManager->sendCommand($pingCommand . "X");
+            $cmdManager->sendCommand($pingCommand);
         }
     }
 }
