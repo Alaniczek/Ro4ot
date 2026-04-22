@@ -1,7 +1,12 @@
 <?php
 require_once 'Components/PHP/Logger.php';
+require_once 'Components/PHP/QueueManager.php';
+require_once 'Components/PHP/RobotManager.php';
 
 $logger = logger::getInstance();
+$robotManager = RobotManager::getInstance();
+$robotManager->changePath('Jsons/RobotUnits.json');
+
 $logger->changePath('Jsons/LogHistory.json');
 //THIS SCRIPT YOU MUST RUN IN TERMINAL (>'-'<)
 //php .\udp_listener.php
@@ -14,8 +19,10 @@ while (true) {
         $logger->log(trim($pkt));
         if($pkt[0] == '$')
         {
-            $logger->log($pkt[1] . $pkt[2] . $pkt[3] . $pkt[4]);
-            // DO DODANIA MODUŁ SPRAWDZAJĄCY W JSON CZY MODEL ISTNIEJE I AKTUALIZOWANIA GO :D
+            $model = substr($pkt, 1, 4);
+            $logger->log($model);
+            $robotManager->selectRobotByModel($model);
+            $robotManager->updateDateRobot();
         }
         echo date('H:i:s') . ' ' . trim($pkt) . "\n";
     }

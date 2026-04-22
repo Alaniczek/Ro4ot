@@ -1,1 +1,390 @@
-[]
+[
+    {
+        "data": "2026-04-22 09:25:10",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:25:10",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:25:11",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-04-22 09:25:25",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:25:25",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:25:29",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
+    },
+    {
+        "data": "2026-04-22 09:28:34",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: W"
+    },
+    {
+        "data": "2026-04-22 09:28:36",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
+    },
+    {
+        "data": "2026-04-22 09:28:37",
+        "zdarzenie": "test_wiadomosci A"
+    },
+    {
+        "data": "2026-04-22 09:28:40",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:28:40",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:28:55",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:28:55",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:10",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:10",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:25",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:25",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:40",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:40",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:52",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
+    },
+    {
+        "data": "2026-04-22 09:29:53",
+        "zdarzenie": "test_wiadomosci A"
+    },
+    {
+        "data": "2026-04-22 09:29:55",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:55",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:29:58",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: S"
+    },
+    {
+        "data": "2026-04-22 09:30:10",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:30:10",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:30:25",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:30:25",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:30:40",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:30:40",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:30:55",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:30:55",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:31:10",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:31:10",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:31:25",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:31:25",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:31:40",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:31:40",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:31:55",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:31:55",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:32:10",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:32:10",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:32:25",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:32:25",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:32:40",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:32:40",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:32:55",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:32:55",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:33:10",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:33:10",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:35:18",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
+    },
+    {
+        "data": "2026-04-22 09:35:20",
+        "zdarzenie": "test_wiadomosci A"
+    },
+    {
+        "data": "2026-04-22 09:35:27",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:35:27",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:35:39",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: A"
+    },
+    {
+        "data": "2026-04-22 09:35:40",
+        "zdarzenie": "test_wiadomosci A"
+    },
+    {
+        "data": "2026-04-22 09:35:42",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:35:42",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:35:57",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:35:57",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:35:57",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 19 4040X"
+    },
+    {
+        "data": "2026-04-22 09:36:03",
+        "zdarzenie": "Wys\u0142ano ping do robota: EXAMPLE (EXAMPLE:EXAMPLE)"
+    },
+    {
+        "data": "2026-04-22 09:36:03",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 192.168.243.171 4040X"
+    },
+    {
+        "data": "2026-04-22 09:36:03",
+        "zdarzenie": "Wys\u0142ano ping do robota: Drimi (192.168.243.143:4210)"
+    },
+    {
+        "data": "2026-04-22 09:36:03",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 192.168.243.171 4040X"
+    },
+    {
+        "data": "2026-04-22 09:36:03",
+        "zdarzenie": "Wys\u0142ano ping do robota: XXX (123.123.123.123:222)"
+    },
+    {
+        "data": "2026-04-22 09:36:03",
+        "zdarzenie": "Wys\u0142ano komend\u0119 do ESP: I 192.168.243.171 4040X"
+    },
+    {
+        "data": "2026-04-22 09:36:04",
+        "zdarzenie": "$E8A3 IS CONNECTED"
+    },
+    {
+        "data": "2026-04-22 09:36:04",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:36:12",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:36:12",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:36:27",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:36:27",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:36:42",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:36:42",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:36:57",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:36:57",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:37:12",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:37:12",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:37:27",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:37:27",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:37:42",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:37:42",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:37:57",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:37:57",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:38:12",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:38:12",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:38:27",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:38:27",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:38:42",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:38:42",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:38:57",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:38:57",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:39:12",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:39:12",
+        "zdarzenie": "E8A3"
+    },
+    {
+        "data": "2026-04-22 09:39:27",
+        "zdarzenie": "$E8A3"
+    },
+    {
+        "data": "2026-04-22 09:39:27",
+        "zdarzenie": "E8A3"
+    }
+]

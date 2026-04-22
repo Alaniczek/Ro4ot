@@ -75,9 +75,32 @@ class RobotManager
                 return;
             }
         }
-        $this->selectedRobot = null;
-        $this->commandManager = null;
+//        $this->selectedRobot = null;
+//        $this->commandManager = null;
     }
+    public function selectRobotByModel(string $Model): void
+    {
+        foreach ($this->getRobotUnits() as $unit) {
+            if ($unit['MODEL'] === $Model) {
+                $this->selectedRobot = new RobotKit($unit['IP'], $unit['Port'], $unit['Name'], $unit['MODEL']);
+                $this->commandManager = new CommandManager($unit['IP'], $unit['Port'], Logger::getInstance());
+                return;
+            }
+        }
+    }
+
+    public function updateDateRobot()
+    {
+        $robots = $this->getRobotUnits();
+        foreach ($robots as &$robot) {
+            if ($robot['Name'] === $this->selectedRobot->Name) {
+                $robot['LastStatus'] = date('Y-m-d H:i:s');
+                break;
+            }
+        }
+        file_put_contents($this->robotUnitsPath, json_encode($robots, JSON_PRETTY_PRINT));
+    }
+
 
     public function sendCommandToSelectedRobot(string $command): void
     {
